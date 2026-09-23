@@ -1,0 +1,22 @@
+# Outputs & Renders
+brag-output/
+brag-output-*/
+*.mp4
+*.gif
+*.jpg
+*.png
+!assets/**/*.png
+!assets/**/*.ogg
+!assets/**/*.wav
+!assets/**/*.mp3
+
+# Python & Node
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+dist/
+
+# OS / Editor
+.DS_Store
+*.swp
