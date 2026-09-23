@@ -1,168 +1,133 @@
-# Step 4: Validate, render, and deliver
+# Step 4: Validate, Render & Deliver Launch Kit
 
-## Validate
+Brag Ultra delivers a complete launch kit ready for multi-platform distribution across Twitter/X, LinkedIn, YouTube, TikTok/Reels, GitHub READMEs, and Discord.
+
+---
+
+## 1. Validation & Pre-render Gate
 
 ```bash
 cd <output-dir>/composition
-npx hyperframes check   # brag's single pre-render gate — fix every error it reports
+npx hyperframes check
 ```
 
-Fix all errors. `check` is brag's single pre-render gate — run it and fix everything it reports, including WCAG contrast failures (they gate as errors, not warnings). Each contrast finding carries a suggested compliant color, so apply it or adjust within the palette family and re-run `check` — most fixes need no screenshot. There is no per-element contrast escape hatch for real text; the only bypass is `check --no-contrast`, which skips the entire WCAG pass (all-or-nothing), not a way to accept one borderline element. For exact contrast thresholds, layout escape hatches, and reporting details, follow the current hyperframes-cli `check` guidance. `check`'s layout pass backstops the "keep all text readable" creative law — fix any reported overflow.
+Fix all errors reported by `check`. It validates:
+- Layout overflow and clipping across target aspect ratios.
+- WCAG color contrast compliance for text readability.
+- Audio asset existence and timing attributes.
 
-For a visual gut-check before rendering, optionally capture key frames:
+---
 
-```bash
-npx hyperframes snapshot   # PNG key frames
-```
+## 2. Rendering Multi-Format Video
 
-## Preview
-
-```bash
-npx hyperframes preview
-```
-
-Tell the user the preview is running and give them the localhost URL. Invite them to check it before rendering.
-
-If the user approves or asks to render:
-
-## Render
-
-```bash
-npx hyperframes render --output ../brag.mp4
-```
-
-This outputs to `<output-dir>/brag.mp4` (one level up from the composition directory).
-
-For a faster iteration render:
-```bash
-npx hyperframes render --quality draft --output ../brag.mp4
-```
-
-For final delivery:
+### Primary Render
 ```bash
 npx hyperframes render --quality high --output ../brag.mp4
 ```
 
-## Pick the poster frame
-
-The poster is the still shown before the video plays — the first thing anyone sees when it's idle or unplayed. Don't leave it to the raw first frame or an arbitrary timestamp; those land on fades, mid-transitions, blank intro backgrounds, or half-rendered text.
-
-You built this composition, so you already know its strongest moment and exactly when it lands — the hook line, the hero reveal, or the final logo. Pick that beat at a **settled** point: text fully animated in, before it exits (the storyboard timings tell you the safe window). Then extract that one frame full-res with ffmpeg. From `<output-dir>/composition`:
-
+### Multi-Format Renders (When `--format all` or `--kit` is enabled)
+If responsive reflow variants are configured:
 ```bash
-# use the timestamp of your strongest settled beat, e.g. 3.2s
+# 16:9 Landscape (1920x1080) for X & YouTube
+npx hyperframes render --width 1920 --height 1080 --output ../brag-16x9.mp4
+
+# 9:16 Vertical (1080x1920) for TikTok, Reels, Shorts
+npx hyperframes render --width 1080 --height 1920 --output ../brag-9x16.mp4
+
+# 1:1 Square (1080x1080) for LinkedIn & Instagram
+npx hyperframes render --width 1080 --height 1080 --output ../brag-1x1.mp4
+```
+
+---
+
+## 3. High-Res Poster Frame Extraction & Frame 0 Baking
+
+### Extract Settled Poster
+Pick the strongest settled frame timestamp (e.g. `3.2s` where headline and device are fully visible):
+```bash
 ffmpeg -ss 3.2 -i ../brag.mp4 -frames:v 1 -q:v 2 ../brag.jpg
 ```
 
-Aim for a frame that's postable on its own (the "show the thing" law — any frozen frame should be shareable). If the pulled frame lands on a transition or mid-animation, nudge the timestamp a few tenths of a second and re-extract.
-
-### Bake the poster as frame 0
-
-A bare `.mp4` has no `poster` attribute — every player and platform picks its own idle thumbnail, and almost all of them grab **frame 0**. Slack, Twitter/X, and Discord regenerate thumbnails server-side and ignore embedded cover-art metadata, so the *only* reliable way to control the idle image everywhere is to make frame 0 *be* the poster.
-
-Replace **only** the first frame's pixels with `brag.jpg`, leaving every other frame and all timing untouched — same duration, same frame count, audio copied through. At 30fps the poster shows for 1/30s before the intro rolls, so it's imperceptible on playback but it's what every thumbnail grabber sees. From `<output-dir>`:
-
+### Bake Poster as Frame 0
+Bake `brag.jpg` into frame 0 of the MP4 so Twitter/X, Slack, and Discord automatically display the crisp poster before playback without custom platform tags:
 ```bash
-ffmpeg -y -i brag.mp4 -i brag.jpg \
+ffmpeg -y -i ../brag.mp4 -i ../brag.jpg \
   -filter_complex "[0:v][1:v]overlay=0:0:enable='eq(n,0)'[v]" \
   -map "[v]" -map 0:a? -c:v libx264 -crf 18 -preset slow -pix_fmt yuv420p \
-  -c:a copy -movflags +faststart brag.poster.mp4 \
-  && mv brag.poster.mp4 brag.mp4
+  -c:a copy -movflags +faststart ../brag.baked.mp4 \
+  && mv ../brag.baked.mp4 ../brag.mp4
 ```
 
-The poster (`brag.jpg`) matches the video's dimensions because it was pulled from the same render, so the overlay lines up exactly. Keep `brag.jpg` alongside — it's the custom-thumbnail asset for platforms that accept an upload (Instagram, TikTok, YouTube, Facebook, and the LinkedIn post editor) and the `poster="brag.jpg"` image for any `<video>` that embeds the brag (a gallery card, the user's site).
+---
 
-## Write share copy
+## 4. Two-Pass Palette-Optimized Animated GIF (`brag.gif`)
 
-Write `<output-dir>/share-copy.txt`.
+Generate an ultra-crisp, high-fps animated GIF optimized for GitHub READMEs, documentation, and Discord previews (<10MB):
 
-The share copy should be:
-- One to three sentences max
-- Postable as-is to Twitter/X, LinkedIn, or Discord
-- Specific to the project — no generic "excited to share" language
-- Tone-matched to the brag video
+```bash
+ffmpeg -y -i ../brag.mp4 -vf "fps=24,scale=800:-1:flags=lanczos,palettegen=stats_mode=diff" ../palette.png
+ffmpeg -y -i ../brag.mp4 -i ../palette.png -filter_complex "fps=24,scale=800:-1:flags=lanczos[x];[x][1:v]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle" ../brag.gif
+rm ../palette.png
+```
 
-`share-copy.txt` is the canonical single caption. Do not put multi-platform variants, long launch notes, or Product Hunt copy in this file.
+---
 
-If variants are useful, write them to a separate optional file:
+## 5. Structured Launch Metadata & Share Copy
+
+### `share-copy.txt` (Canonical Post Caption)
+Write `<output-dir>/share-copy.txt` with a concise, punchy 1–2 sentence post:
+```text
+Built [Product Name] — [one-liner claim].
+[Core highlight or benchmark].
+Link & open source below 🚀
+```
+
+### `share-copy-variants.md` (Multi-Platform Copy)
+Write `<output-dir>/share-copy-variants.md` with customized copy for:
+- **Twitter / X:** Fast, hook-first, short sentences, relevant tags.
+- **LinkedIn:** Professional craft narrative, architectural insight, engineering takeaway.
+- **Reddit (r/rust, r/react, r/linux):** Technical deep-dive context, benchmarks, repo link.
+- **Product Hunt:** Maker tagline, 3 core bullets, question to the community.
+
+### `launch-metadata.json` (OpenGraph & SEO Bundle)
+Write `<output-dir>/launch-metadata.json`:
+```json
+{
+  "title": "[Product Name] — [Tagline]",
+  "description": "[1-sentence description]",
+  "openGraph": {
+    "title": "[Product Name]",
+    "type": "video.other",
+    "image": "brag.jpg",
+    "video": "brag.mp4"
+  },
+  "twitter": {
+    "card": "player",
+    "site": "@drnzy",
+    "image": "brag.jpg",
+    "player": "brag.mp4"
+  },
+  "tags": ["[Tag1]", "[Tag2]", "[Tag3]"],
+  "generatedAt": "2026-09-23T14:42:00Z"
+}
+```
+
+---
+
+## 6. Final Launch Kit Output Structure
 
 ```text
-<output-dir>/share-copy-variants.md
+brag-output/
+├── brag.mp4                 # Primary mastered video with Frame-0 poster baked in
+├── brag-16x9.mp4            # Landscape export (YouTube, X)
+├── brag-9x16.mp4            # Vertical export (TikTok, Reels, Shorts)
+├── brag-1x1.mp4             # Square export (LinkedIn, Instagram)
+├── brag.jpg                 # Full-resolution poster thumbnail
+├── brag.gif                 # Two-pass palette-optimized README GIF
+├── share-copy.txt           # Clean primary caption
+├── share-copy-variants.md   # Tailored captions for X, LinkedIn, Reddit, Product Hunt
+├── launch-metadata.json     # OpenGraph & social tags
+├── brag-plan.md             # Storyboard & timing contract
+├── composition-brief.md     # Hyperframes brief
+└── composition/             # Source Hyperframes project
 ```
-
-### Share copy by tone
-
-**`default`:**
-```
-Made [App Name]. It's [what it does, in the project's own absurd terms].
-[The best line from the product.]
-```
-
-**`polished`:**
-```
-Introducing [App Name]: [clean one-liner from the site].
-Built with [stack if notable].
-```
-
-**`yc-parody`:**
-```
-We built [App Name] to solve [problem stated completely seriously].
-[Deadpan feature or stat.]
-```
-
-**`chaotic`:**
-```
-[ALL CAPS CLAIM].
-[App Name] is [wildly overstated description].
-Link below.
-```
-
-**`deadpan`:**
-```
-I made [App Name].
-It [what it does].
-```
-
-**`cinematic`:**
-```
-[App Name].
-[Tagline from the site, verbatim or lightly adapted.]
-```
-
-**`app-store`:**
-```
-[App Name] is now live.
-[Feature 1], [Feature 2], and [Feature 3] — all in one place.
-```
-
-### Example: Taxi for Taxis
-
-```
-Every day, taxis carry us. But who carries the taxis?
-Taxi for Taxis: the ride-hailing app for ride-hailing assets.
-Available in 12 metros.
-```
-
-## Final output structure
-
-After this step, `<output-dir>/` should contain:
-
-```
-<output-dir>/
-  brag.mp4                — the rendered video
-  brag.jpg                — the poster (best frame, for <video poster>)
-  brag-plan.md            — the plan and storyboard
-  composition-brief.md    — the Hyperframes handoff brief
-  share-copy.txt          — the share caption
-  composition/            — the Hyperframes project
-    index.html
-    ...
-```
-
-## Telling the user
-
-After everything is done, tell the user:
-- Where the video is (`<output-dir>/brag.mp4`)
-- Where the share copy is
-- One sentence on what the video does creatively
-- Optionally: offer to re-roll a scene, change tone, or try a different angle
