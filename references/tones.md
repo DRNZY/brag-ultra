@@ -1,231 +1,108 @@
-# Tone reference
+# Tone Reference
 
-Seven tones. Each changes scripting energy, pacing, typography personality, and transition style.
-
----
-
-## `default`
-
-**Energy:** Playful, clean, postable. The product gets to be funny on its own terms.
-
-**Voice:** First person plural. Warm. Direct. No corporate language.
-
-**Typography:** Mixed case. Comfortable weight. Let words breathe.
-
-**Pacing:** 4-5 scenes. Each scene 3-5 seconds. Comfortable rhythm.
-
-**Hook style:** A simple question or observation that sets up the reveal.
-```
-Dating apps were built for humans.
-Obvious mistake.
-```
-
-**Highlight style:** Short punchy phrases. One idea per scene.
-```
-Swipe through eligible horses near your pasture.
-```
-
-**Outro style:** The product name, then a tagline. Light punchline.
-```
-Horse Tinder.
-Find your perfect stablemate.
-```
-
-**Transitions:** Crossfade or clean slide.
-
-**When to use:** Most absurd consumer apps. Projects that have personality without trying too hard.
+Eight tone presets ship with Brag Ultra. Each defines scripting energy, pacing, typography personality, motion curves, and transition style.
 
 ---
 
-## `polished`
+## 1. `apple-keynote` (The Gold Standard)
 
-**Energy:** Serious, elegant. Uses restraint as the creative choice.
-
-**Voice:** Third person or no voice. The product speaks for itself.
-
-**Typography:** Mixed case. Light-to-medium weight. Generous letter-spacing. Nothing aggressive.
-
-**Pacing:** 3-4 scenes. Each scene 4-6 seconds. Confidence through slow reveals.
-
-**Hook style:** A single strong image or the product name at full scale.
-
-**Highlight style:** One feature per scene. No bullets. No lists.
-```
-Wing certification
-upon completion.
-```
-
-**Outro style:** Product name. Tagline. Silence.
-
-**Transitions:** Slow crossfade (0.6-0.8s).
-
-**When to use:** Projects that aren't jokes. Products that want to feel premium. Anytime the user says "clean" or "elegant."
-
----
-
-## `yc-parody`
-
-**Energy:** Deadpan startup launch energy. The joke is how seriously it's delivered.
-
-**Voice:** Serious. Matter-of-fact. No winking. The absurdity comes from the product, not the tone.
-
-**Typography:** Sentence case. Heavy weight or medium weight. Courier-adjacent for data points. No decoration.
-
-**Pacing:** 4-5 scenes. Structured. Each scene makes one claim.
-
-**Hook style:** The problem, stated completely seriously.
-```
-Every day, taxis carry us.
-But who carries the taxis?
-```
-
-**Highlight style:** Feature or metric stated as fact.
-```
-Available in 12 metros.
-99.1% fleet uptime.
-```
-
-**Outro style:** Product name. The tagline. A URL that implies legitimacy.
-```
-Taxi for Taxis
-The ride-hailing app for ride-hailing assets.
-taxifortaxis.com
-```
-
-**Transitions:** Hard cut or minimal crossfade (0.2s).
-
-**When to use:** Any recursive or absurd concept that benefits from being played straight. "Psychologists for Chatbots", "Taxi for Taxis", "Briefcase for Baby."
+- **Energy:** Quiet confidence, tactile physics, human-centric copy, sublime restraint.
+- **Voice:** First-person plural or product-forward. Unflinching, clear, understated elegance.
+- **Typography:** SF Pro Display / Plus Jakarta Sans. Tight negative kerning (-0.035em). Bold headers (800) with airy, crisp body text.
+- **Pacing:** 3–4 scenes. 4–6 seconds per scene. Generous pauses to let craftsmanship resonate.
+- **Hook Style:** Confronting a fundamental friction or stating a radical breakthrough.
+  ```text
+  Searching local code should take milliseconds.
+  Not coffee breaks.
+  ```
+- **Highlight Style:** Precise metrics and physical hardware/terminal framing.
+  ```text
+  2.1ms search speed.
+  100% on-device CUDA embeddings.
+  Zero telemetry.
+  ```
+- **Outro Style:** Full brand mark, serene glow, understated tagline.
+  ```text
+  HyperIndex
+  Local search, perfected.
+  ```
+- **Transitions:** Critically damped spring zoom (`scale: 0.94 -> 1.0`), soft 1px frosted glass crossfade.
+- **When to Use:** Flagship developer tools, precision desktop apps, or any project that deserves Apple keynote reverence.
 
 ---
 
-## `chaotic`
+## 2. `default`
 
-**Energy:** Fast, loud, unhinged. The video is the joke.
-
-**Voice:** Aggressive. SHORT WORDS. CAPS. Metric dumps. Exclamation marks optional but not mandatory — confidence is louder.
-
-**Typography:** ALL CAPS. Heavy weight. Slightly oversized. Some words tilted. Some words larger than expected.
-
-**Pacing:** 6-8 scenes. Some scenes under 2 seconds. Never more than 4 seconds per scene.
-
-**Hook style:** Something that shouldn't exist, stated at full volume.
-```
-TRANSPORTATION WAS TOO CALM.
-```
-
-**Highlight style:** Rapid-fire. One word or one number per beat.
-```
-8,400 BOARS
-3 MINUTE ETA
-TUSKS-FIRST PICKUP
-```
-
-**Outro style:** The name slams in. Tagline hits. Cut to black.
-```
-UBER FOR WILD BOARS
-On-demand chaos, now with routing.
-```
-
-**Transitions:** Hard cut. Flash cut (brief white/black frame). Zoom cut (scale 1.2→1.0 on entrance).
-
-**When to use:** Chaotic concepts, logistics parodies, anything that can be played as a hype reel. "Uber for Wild Boars", anything with urgency or speed.
+- **Energy:** Playful, clean, postable. The product gets to be impressive and charming on its own terms.
+- **Voice:** Warm, direct, conversational.
+- **Typography:** Mixed case. Generous line height. Clean modern sans.
+- **Pacing:** 4–5 scenes. 3–5 seconds each.
+- **Hook Style:** A light observation setting up the reveal.
+- **Transitions:** Crossfade or clean directional slide.
+- **When to Use:** Consumer apps, indie web projects, creative utilities.
 
 ---
 
-## `deadpan`
+## 3. `polished`
 
-**Energy:** Calm. Dry. The joke is that nothing registers as unusual.
-
-**Voice:** Minimal. One observation. Then the product. That's it.
-
-**Typography:** Mixed case. Large. Sparse. Lots of empty space. One thought at a time.
-
-**Pacing:** 3-4 scenes. Long holds. 4-7 seconds per scene. The pace is the joke.
-
-**Hook style:** A quiet observation. No setup. No punchline yet.
-```
-I used to fear the sky.
-```
-
-**Highlight style:** One sentence per scene. No bullets. No excitement.
-```
-Now I fear birds, weather, and gravity.
-```
-
-**Outro style:** The product name. Nothing else. Maybe a very small tagline. Long hold on empty space.
-```
-Fish Flight School.
-```
-
-**Transitions:** Very slow crossfade (0.8-1.0s). Or long hold before the next scene.
-
-**When to use:** Projects that have a quote as the strongest thing on the site. "Psychologists for Chatbots" testimonial-forward approach. Anything where restraint makes the joke land harder.
+- **Energy:** Serious, elegant, high-craft. Restraint is the primary choice.
+- **Voice:** Third person or purely product-driven.
+- **Typography:** Refined serif or geometric sans. High letter-spacing.
+- **Pacing:** 3–4 scenes. 4–6 seconds each. Confidence through deliberate, slow reveals.
+- **Transitions:** Slow crossfade (0.6s–0.8s) with micro-scale.
+- **When to Use:** Serious SaaS, financial engineering, academic projects, developer infrastructure.
 
 ---
 
-## `cinematic`
+## 4. `yc-parody`
 
-**Energy:** Dramatic. Trailer-scale. The product is being treated like a blockbuster.
-
-**Voice:** Epic. Short declarative sentences. Each one lands before the next begins.
-
-**Typography:** ALL CAPS or heavy mixed case. Full-bleed scenes. Large type. Significant scale.
-
-**Pacing:** 4-5 scenes. 3-5 seconds each. Dramatic reveals, not quick cuts.
-
-**Hook style:** A sweeping statement about the world, stated seriously.
-```
-For too long,
-fish were told to stay underwater.
-```
-
-**Highlight style:** The product's capabilities stated like superpowers.
-```
-Thermal identification.
-Cloud navigation.
-Emergency splash landing protocols.
-```
-
-**Outro style:** Product name slams in full-screen. Tagline. Music swell implied.
-```
-FISH FLIGHT SCHOOL
-The sky was never the limit.
-```
-
-**Transitions:** Dramatic wipe or slow crossfade with scale (scene enters at 0.95, reaches 1.0).
-
-**When to use:** Anything with natural epic quality. "Fish Flight School" maps perfectly. Anything involving scale, nature, or grand claims.
+- **Energy:** Deadpan startup launch energy. The humor comes from taking an audacious idea 100% seriously.
+- **Voice:** Solemn, mission-driven, corporate jargon applied to unorthodox concepts.
+- **Typography:** Heavyweight modern sans, monospace for metrics.
+- **Pacing:** 4–5 scenes. Structured claim → metric → vision.
+- **Transitions:** Instant hard cut or 0.2s snap wipe.
+- **When to Use:** Absurd or recursive concepts, parodies, hackathon wildcards.
 
 ---
 
-## `app-store`
+## 5. `chaotic`
 
-**Energy:** Clean. Professional. Feature-forward. The product is real (even when it's not).
+- **Energy:** Fast, loud, unhinged, high-velocity hype reel.
+- **Voice:** Short uppercase bursts, exclamation points, rapid metric dumps.
+- **Typography:** Heavy, tilted, high-contrast monospace & headline grotesque.
+- **Pacing:** 6–8 scenes. Rapid cuts under 2 seconds.
+- **Transitions:** Flash cuts, camera shakes, chromatic aberration flares, aggressive zooms.
+- **When to Use:** High-octane gaming tools, wild CLI speed tests, chaotic experimental bots.
 
-**Voice:** Feature-benefit. Third person. Present tense.
+---
 
-**Typography:** Title case. Medium weight. Clean, readable. No aggression.
+## 6. `deadpan`
 
-**Pacing:** 4-6 scenes. Each scene: product name or feature name, then 1-2 supporting details.
+- **Energy:** Calm, dry, understated. The restraint is the punchline.
+- **Voice:** Ultra-minimalist. One sentence per beat.
+- **Typography:** Large, sparse, vast negative space.
+- **Pacing:** 3–4 scenes. Long 5–7s holds.
+- **Transitions:** Slow seamless fade into obsidian void.
+- **When to Use:** Projects with unforgettable one-liners, dry developer humor, minimalist single-purpose utilities.
 
-**Hook style:** Product name + tagline, clean.
-```
-Psychologists for Chatbots.
-Because even helpful assistants need help.
-```
+---
 
-**Highlight style:** Feature card structure. Name + brief description.
-```
-Prompt Trauma Processing
-Identify and resolve harmful conversation patterns.
-```
+## 7. `cinematic`
 
-**Outro style:** CTA-style. Call to action or download prompt.
-```
-Available now.
-All chatbot models welcome.
-```
+- **Energy:** Epic, trailer-scale, blockbuster anticipation.
+- **Voice:** Deep, declarative, philosophical.
+- **Typography:** All-caps tracked typography, glowing backlights.
+- **Pacing:** 4–5 scenes. Rhythmic swells and sweeping reveals.
+- **Transitions:** Wide cinematic letterbox wipe, dramatic zoom-through.
+- **When to Use:** Audio players, graphics engines, AI model breakthroughs, audio synthesis.
 
-**Transitions:** Clean slide or wipe (0.35-0.45s). Nothing dramatic.
+---
 
-**When to use:** Products that benefit from being taken seriously as a product, even if absurd. Good for anything B2B-parody or therapy/wellness adjacent.
+## 8. `app-store`
+
+- **Energy:** Clean, commercial, feature-card forward.
+- **Voice:** Feature-benefit breakdown with tactile micro-interactions.
+- **Typography:** Friendly, readable, crisp title case.
+- **Pacing:** 4–6 scenes. Rapid feature carousel.
+- **Transitions:** Smooth iOS-style card swipes (0.35s).
+- **When to Use:** Mobile apps (Expo/React Native), store listings, commercial products.
