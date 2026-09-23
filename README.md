@@ -2,35 +2,31 @@
 
 Turn code into high-fidelity launch videos and social release kits.
 
-Brag Ultra inspects your project, understands what makes it unique, and generates an Apple-keynote aesthetic video (15–25s) with multi-format layouts, mastered audio, and launch assets.
+Brag Ultra inspects your project, understands what makes it unique, and generates an Apple-keynote aesthetic video (15–25s) with multi-format layouts, mastered audio, and complete launch assets.
 
 ---
 
 ## Highlights
 
-- **Multi-Format Responsive Reflow:** Native layouts for 16:9 Landscape (X, YouTube), 9:16 Vertical (TikTok, Reels, Shorts), and 1:1 Square (LinkedIn, Instagram).
-- **Intelligent Audio & Voiceover Ducking:** Automatic -12dB background music ducking under narration with smooth 0.3s attack / 0.5s release curves, plus synced tactile keystrokes and impact SFX.
-- **Terminal & CLI Replay:** Native support for developer tools, terminal capture, realistic human typing cadence, and high-DPI vector terminal frames.
-- **Kinetic Shaders & Spring Physics:** Subtle film grain overlays (SVG `feTurbulence`), lens chromatic aberration on transients, critically damped spring physics, and animated SVG path tracing.
-- **Complete Launch Kit:** Outputs mastered MP4s, frame-0 baked poster JPGs, two-pass palette-optimized animated GIFs (<10MB), and structured social copy + OpenGraph metadata.
+* **Multi-Format Responsive Reflow:** Native layouts for 16:9 Landscape (X, YouTube), 9:16 Vertical (TikTok, Reels, Shorts), and 1:1 Square (LinkedIn, Instagram).
+* **Intelligent Audio & Voiceover Ducking:** Automatic -12dB background music ducking under narration with smooth 0.3s attack / 0.5s release curves, plus synced tactile keystrokes and impact SFX.
+* **Terminal & CLI Replay:** Native support for developer tools, terminal capture, realistic human typing cadence, and high-DPI vector terminal frames.
+* **Kinetic Shaders & Spring Physics:** Subtle film grain overlays (SVG `feTurbulence`), lens chromatic aberration on transients, critically damped spring physics, and animated SVG path tracing.
+* **Complete Launch Kit:** Outputs mastered MP4s, frame-0 baked poster JPGs, two-pass palette-optimized animated GIFs (<10MB), and structured social copy + OpenGraph metadata.
 
 ---
 
-## Quick Start
-
-### Installation
-
-Clone the repository and link the skill to your agent configuration:
+## Installation
 
 ```bash
-git clone https://github.com/DRNZY/brag-ultra.git ~/Projects/brag-ultra
-mkdir -p ~/.gemini/config/skills/
-cp -r ~/Projects/brag-ultra/skills/brag-ultra ~/.gemini/config/skills/brag
+npx skills add DRNZY/brag-ultra
 ```
 
-### Usage
+---
 
-In any project directory, invoke `/brag`:
+## Usage
+
+In any project directory, invoke `/brag` in your AI coding assistant:
 
 ```bash
 # Standard high-polish launch video
@@ -69,14 +65,14 @@ brag-output/
 
 ## Tone Presets
 
-- `apple-keynote`: Quiet confidence, tactile physics, human-centric copy, sublime restraint.
-- `polished`: Refined, elegant, high craft for developer infrastructure and SaaS.
-- `default`: Playful, direct, clean showcase for indie products.
-- `yc-parody`: Deadpan seriousness applied to unorthodox projects.
-- `chaotic`: High-velocity hype reel with aggressive cuts and tilts.
-- `deadpan`: Minimalist timing where restraint is the punchline.
-- `cinematic`: Trailer-scale pacing with atmospheric lighting and score.
-- `app-store`: Clean feature-card walkthrough with tactile UI feedback.
+* `apple-keynote`: Quiet confidence, tactile physics, human-centric copy, sublime restraint.
+* `polished`: Refined, elegant, high craft for developer infrastructure and SaaS.
+* `default`: Playful, direct, clean showcase for indie products.
+* `yc-parody`: Deadpan seriousness applied to unorthodox projects.
+* `chaotic`: High-velocity hype reel with aggressive cuts and tilts.
+* `deadpan`: Minimalist timing where restraint is the punchline.
+* `cinematic`: Trailer-scale pacing with atmospheric lighting and score.
+* `app-store`: Clean feature-card walkthrough with tactile UI feedback.
 
 ---
 
