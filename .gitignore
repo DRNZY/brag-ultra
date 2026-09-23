@@ -20,3 +20,4 @@ dist/
 # OS / Editor
 .DS_Store
 *.swp
+skills-lock.json
