@@ -1,14 +1,14 @@
-# Quickstart Guide
+# Quickstart guide
 
-Get up and running with Brag Ultra in seconds.
+Get started with Brag Ultra.
 
-## 1. Install Skill
+## 1. Install skill
 
 ```bash
 npx skills add DRNZY/brag-ultra
 ```
 
-## 2. Generate Video
+## 2. Generate video
 
 Run `/brag` in your AI coding assistant from any project directory.
 
